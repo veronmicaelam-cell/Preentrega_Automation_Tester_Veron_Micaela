@@ -1,0 +1,22 @@
+# Entorno virtual (no se sube a Git porque cada uno crea el suyo localmente)
+venv/
+.venv/
+env/
+
+# Caché de ejecuciones de Python (archivos temporales compilados)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caché y reportes de Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+reports/assets/
+
+# Configuración e historial del editor de código (VS Code, PyCharm)
+.vscode/
+.idea/
+
+# Reportes de ejecuciones y logs
+*.log
