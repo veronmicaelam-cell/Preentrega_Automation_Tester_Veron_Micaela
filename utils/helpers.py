@@ -5,6 +5,8 @@ frecuentes dentro de la aplicación, evitando la duplicación de código en la s
 de tests.
 """
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # Variable global con la URL de la aplicación
 URL_LOGIN = 'https://www.saucedemo.com/' 
@@ -95,6 +97,8 @@ def añadir_producto_al_carrito(driver):
     INTERACCIÓN Y VERIFICACIÓN:
     - Ejecuta 'click()' para añadir el ítem.
     - Utiliza '.text.capitalize()' para normalizar el texto del botón.
+    - Utiliza 'WebDriverWait' para esperar dinámicamente a que el texto del botón cambie a 'Remove'.
+    - Re-localiza el botón para evitar StaleElementReferenceException
     - Confirma con `assert` que el texto haya cambiado a 'Remove' para validar el cambio de estado.
     """
 
@@ -103,7 +107,14 @@ def añadir_producto_al_carrito(driver):
     boton_agregar = first_item.find_element(By.TAG_NAME, 'button')
     boton_agregar.click()
 
-    assert boton_agregar.text.capitalize() == 'Remove', "ERROR: El botón no cambio a 'Remove'"
+    # Espera explícita corrigiendo el selector CSS (.inventory_item button)
+    WebDriverWait(driver, 10).until(
+        EC.text_to_be_present_in_element((By.CSS_SELECTOR, '.inventory_item button'), 'Remove')
+    )
+    # Re-localizamos el botón dentro del primer ítem para evitar StaleElementReferenceException
+    boton_agregar = first_item.find_element(By.TAG_NAME, 'button')
+    
+    assert boton_agregar.text == 'Remove', "ERROR: El botón no cambio a 'Remove'"
 
 def verificar_contador_carrito(driver):
     """Verifica que el contador flotante del carrito muestre la cantidad correcta de productos.

@@ -28,6 +28,9 @@ def driver():
     # Inicialización del driver
     driver = webdriver.Chrome(service = service, options = options)
 
+    # Espera implícita global para todos los find_element
+    # driver.implicitly_wait(10)
+
     yield driver
 
     # Cierre de sesión y limpieza de recursos

@@ -17,6 +17,7 @@ def test_añadir_producto(usuario_logueado):
      añadir_producto_al_carrito(usuario_logueado)
 
 def test_verificar_contador(usuario_logueado):
+     añadir_producto_al_carrito(usuario_logueado)
      verificar_contador_carrito(usuario_logueado)
 
 def test_navegación_carrito(usuario_logueado):
