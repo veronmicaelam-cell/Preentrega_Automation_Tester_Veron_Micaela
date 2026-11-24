@@ -7,10 +7,28 @@ Las fixtures definidas en conftest.py permiten separar responsabilidades: centra
 el setup y teardown del navegador para no repetir código dentro de los tests.
 """
 import pytest
+import pathlib
+import logging
 from selenium import webdriver 
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from utils.helpers import login_helper
+
+# 1) Carpeta donde se almacenarán los logs
+audit_dir = pathlib.Path('logs')
+audit_dir.mkdir(exist_ok=True)
+
+# 2) Configuración global 
+logging.basicConfig(
+    filename=audit_dir / 'suite.log', # Ruta del archivo log
+    level=logging.INFO, # INFO y superirores
+    format='%(asctime)s %(levelname)s %(name)s - %(message)s',
+    datefmt='%H:%M:%S',
+    force=True
+)
+
+# 3) Logger específico que úsaran los tests
+logger = logging.getLogger('talentolab')
 
 @pytest.fixture()
 def driver():
@@ -46,3 +64,8 @@ def usuario_logueado(driver):
     """
     login_helper(driver)
     return(driver)
+
+def pytest_html_report_title(report):
+    report.title = "Reporte de Automatizacion - Sauce Demo"
+
+

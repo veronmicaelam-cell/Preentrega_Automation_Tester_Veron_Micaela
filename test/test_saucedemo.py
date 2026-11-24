@@ -1,5 +1,5 @@
 from utils.helpers import(login_helper, verificar_inventario, productos_visibles, validar_interfaz, 
-añadir_producto_al_carrito, verificar_contador_carrito, navegar_carrito, comprobar_carrito)
+añadir_producto_al_carrito, verificar_contador_carrito, navegar_carrito, comprobar_carrito, logger)
 
 def test_login(driver):
      login_helper(driver)

@@ -4,9 +4,12 @@ Este módulo centraliza funciones de soporte como inicios de sesión o acciones
 frecuentes dentro de la aplicación, evitando la duplicación de código en la suite
 de tests.
 """
+import logging
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+logger = logging.getLogger('talentolab')
 
 # Variable global con la URL de la aplicación
 URL_LOGIN = 'https://www.saucedemo.com/' 
@@ -19,18 +22,23 @@ def login_helper(driver):
     3. Completa los campos con 'send_keys()' y envía el formulario mediante '.click()'.
     4. Válida la URL de destino usando 'driver.current_url' y una aserción 'assert'.
     """
+    
+    logger.info("Inciciando login con usuario: %s")
 
     # 1. Abrir navegador en la URL especificada
     driver.get(URL_LOGIN)
 
     # 2. Encontrar elementos e interactuar con el formulario
+    logger.info("Completando credenciales...")
     driver.find_element(By.ID,"user-name").send_keys("standard_user") 
     driver.find_element(By.ID,"password").send_keys("secret_sauce") 
 
     # 3. Hacer clic en el botón de confirmación
+    logger.info("Enviando formulario de login")
     driver.find_element(By.ID,"login-button").click()
 
     # 4. Verificar redireccionamiento exitoso
+    logger.info("Verificando redirección exitosa")
     assert "/inventory.html" in driver.current_url, "ERROR: No se redirigió a /inventory.html"
 
 def verificar_inventario(driver):
@@ -162,3 +170,4 @@ def comprobar_carrito(driver):
     producto_nombre_carrito = driver.find_element(By.CLASS_NAME,'inventory_item_name').text
 
     assert producto_nombre_carrito == "Sauce Labs Backpack", f"ERROR: No es el mismo nombre"
+
