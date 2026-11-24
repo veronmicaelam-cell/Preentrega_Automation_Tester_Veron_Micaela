@@ -439,10 +439,10 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>Reporte de Automatizacion - Sauce Demo</h1>
-    <p>Report generated on 24-Nov-2026 at 12:49:39 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
+    <p>Report generated on 24-Nov-2026 at 14:36:13 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
     <h2>Summary</h2>
-    <p>8 tests ran in 47.51 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">8 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <p>8 tests ran in 65.09 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">7 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">1 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -453,11 +453,25 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
           <th class="sortable links" col="links">Links</th></tr>
         <tr hidden="true" id="not-found-message">
           <th colspan="4">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test/test_saucedemo.py::test_verificar_inventario</td>
+          <td class="col-duration">5.57</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">usuario_logueado = &lt;selenium.webdriver.chrome.webdriver.WebDriver (session=&quot;b94e74dc5166ef711705168a76e817c5&quot;)&gt;<br/><br/>    def test_verificar_inventario(usuario_logueado):<br/>&gt;        verificar_inventario(usuario_logueado)<br/><br/>test\test_saucedemo.py:8: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>driver = &lt;selenium.webdriver.chrome.webdriver.WebDriver (session=&quot;b94e74dc5166ef711705168a76e817c5&quot;)&gt;<br/><br/>    def verificar_inventario(driver):<br/>        &quot;&quot;&quot;Verifica que el usuario se encuentre en la página de inventario/catálogo.<br/>    <br/>        OBTENCIÓN DE DATOS:<br/>        - Recupera el título de la ventana del navegador usando &#x27;driver.title&#x27;.<br/>        - Localiza el encabezado principal de la sección mediante la clase &#x27;title&#x27;<br/>          y extrae su contenido de texto con la propiedad &#x27;.text&#x27;.<br/>    <br/>        VERIFICACIÓN:<br/>        - Valida mediante &#x27;assert&#x27; que el título de la página sea &#x27;Swag Labs&#x27;.<br/>        - Valida mediante &#x27;assert&#x27; que el título de la sección sea &#x27;Products&#x27;.<br/>        - Incluye mensajes explicativos de fallo en caso de que alguna aserción no se cumpla.<br/>        &quot;&quot;&quot;<br/>        page_title = driver.title<br/>        section_title = driver.find_element(By.CLASS_NAME, &quot;title&quot;).text<br/>    <br/>&gt;       assert page_title == &quot;Sauce Demo&quot;, f&quot;ERROR: Título de ventana esperado &#x27;Swag Labs&#x27;, Obtenido{page_title}&quot;<br/>               ^^^^^^^^^^^^^^^^^^^^^^^^^^<br/><span class="error">E       AssertionError: ERROR: Título de ventana esperado &#x27;Swag Labs&#x27;, ObtenidoSwag Labs</span><br/><br/>utils\helpers.py:60: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>INFO     WDM:logger.py:11 ====== WebDriver manager ======
+INFO     WDM:logger.py:11 Driver [C:\Users\Nicky\.wdm\drivers\chromedriver\win64\157.0.8103.78\chromedriver-win64/chromedriver.exe] found in cache by browser version
+INFO     talentolab:helpers.py:26 Inciciando login con usuario: %s
+INFO     talentolab:helpers.py:32 Completando credenciales...
+INFO     talentolab:helpers.py:37 Enviando formulario de login
+INFO     talentolab:helpers.py:41 Verificando redirección exitosa<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test/test_saucedemo.py::test_login</td>
-          <td class="col-duration">13.27</td>
+          <td class="col-duration">4.82</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -469,22 +483,8 @@ INFO     talentolab:helpers.py:41 Verificando redirección exitosa<br/></div></td
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">test/test_saucedemo.py::test_verificar_inventario</td>
-          <td class="col-duration">5.80</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>INFO     WDM:logger.py:11 ====== WebDriver manager ======
-INFO     WDM:logger.py:11 Driver [C:\Users\Nicky\.wdm\drivers\chromedriver\win64\157.0.8103.78\chromedriver-win64/chromedriver.exe] found in cache by browser version
-INFO     talentolab:helpers.py:26 Inciciando login con usuario: %s
-INFO     talentolab:helpers.py:32 Completando credenciales...
-INFO     talentolab:helpers.py:37 Enviando formulario de login
-INFO     talentolab:helpers.py:41 Verificando redirección exitosa<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
           <td class="col-name">test/test_saucedemo.py::test_visibilidad_productos</td>
-          <td class="col-duration">4.84</td>
+          <td class="col-duration">5.03</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -498,7 +498,7 @@ INFO     talentolab:helpers.py:41 Verificando redirección exitosa<br/></div></td
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test/test_saucedemo.py::test_validacion_de_interfaz</td>
-          <td class="col-duration">4.63</td>
+          <td class="col-duration">5.17</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -512,7 +512,7 @@ INFO     talentolab:helpers.py:41 Verificando redirección exitosa<br/></div></td
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test/test_saucedemo.py::test_aÃ±adir_producto</td>
-          <td class="col-duration">4.39</td>
+          <td class="col-duration">5.65</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -526,7 +526,7 @@ INFO     talentolab:helpers.py:41 Verificando redirección exitosa<br/></div></td
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test/test_saucedemo.py::test_verificar_contador</td>
-          <td class="col-duration">4.71</td>
+          <td class="col-duration">16.13</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -540,7 +540,7 @@ INFO     talentolab:helpers.py:41 Verificando redirección exitosa<br/></div></td
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test/test_saucedemo.py::test_navegaciÃ³n_carrito</td>
-          <td class="col-duration">4.72</td>
+          <td class="col-duration">15.07</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -554,7 +554,7 @@ INFO     talentolab:helpers.py:41 Verificando redirección exitosa<br/></div></td
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test/test_saucedemo.py::test_comprobaciÃ³n_carrito</td>
-          <td class="col-duration">5.00</td>
+          <td class="col-duration">7.18</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">

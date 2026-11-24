@@ -9,10 +9,14 @@ el setup y teardown del navegador para no repetir código dentro de los tests.
 import pytest
 import pathlib
 import logging
+import re
+import base64
 from selenium import webdriver 
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from utils.helpers import login_helper
+from pathlib import Path
+from pytest_html import extras as html_extras
 
 # 1) Carpeta donde se almacenarán los logs
 audit_dir = pathlib.Path('logs')
@@ -65,7 +69,45 @@ def usuario_logueado(driver):
     login_helper(driver)
     return(driver)
 
+#Personalizar el título del reporte HTML
 def pytest_html_report_title(report):
     report.title = "Reporte de Automatizacion - Sauce Demo"
 
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
 
+    resultado = yield
+    reporte = resultado.get_result()
+
+    if reporte.when == "call" and reporte.failed:
+        driver = item.funcargs.get("driver") #["DRIVER"]=>KEYERROR / .GET() => NONE
+        if driver: 
+            carpeta = Path("reports/screenshots")
+            carpeta.mkdir(parents=True, exist_ok=True)
+
+            nombre = re.sub(
+                r"[^a-zA-Z0-9_-]",
+                "_",
+                item.nodeid
+            )
+
+            ruta_captura = carpeta /f"{nombre}.png"
+
+            # 1) Guardamos la captura
+            driver.save_screenshot(str(ruta_captura))
+
+            # 2) Después leemos el archivo guardado y lo codificamos a Base64
+            imagen_base64 = base64.b64encode(
+                ruta_captura.read_bytes()
+            ).decode("utf-8")
+
+            # 3) Finalmente lo adjuntamos al reporte HTML
+            extras = getattr(reporte, "extras", [])
+
+            extras.append(
+                html_extras.png(
+                    imagen_base64,
+                    name="captura de error"
+                )
+            )
+            reporte.extras = extras
